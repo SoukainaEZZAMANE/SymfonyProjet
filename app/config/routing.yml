@@ -1,0 +1,16 @@
+
+
+esig_home:
+    resource: "@EsigBundle/Resources/config/routing.yml"
+    prefix:   /
+utilisateurs:
+    resource: "@UtilisateursBundle/Resources/config/routing.yml"
+    prefix:   /
+pages:
+    resource: "@PagesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+rest : 
+  type : rest 
+  resource : "routing_rest.yml"
+  prefix : /api

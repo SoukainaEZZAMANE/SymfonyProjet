@@ -1,0 +1,37 @@
+
+esig_homepage:
+    path:     /
+    defaults: { _controller: EsigBundle:Dashboard:index }
+
+esig_index:
+    path:     /dashboard
+    defaults: { _controller: EsigBundle:Dashboard:index }
+
+
+add_parcelle:
+    path:     /parcelle/add
+    defaults: { _controller: EsigBundle:Parcelle:addParcelle }
+
+delete_parcelle:
+    path:     /parcelle/delete/{id}
+    defaults: { _controller: EsigBundle:Parcelle:deleteParcelle }
+
+edit_parcelle:
+    path:     /parcelle/edit/{id}
+    defaults: { _controller: EsigBundle:Parcelle:editParcelle }
+
+#get_parcelles:
+#    path:     /getParcelles
+#    defaults: { _controller: EsigBundle:ParcelleRest:getParcelles }
+
+index:
+
+    path:     /
+    defaults: { _controller: EsigBundle:Dashboard:index , _locale: fr }
+parcelles:
+
+    path:     /parcelle
+    defaults: { _controller: EsigBundle:Parcelle:index }
+parcelle_create:
+    path:     /parcelleCreate
+    defaults: { _controller: EsigBundle:Parcelle:createParcelle }

@@ -1,0 +1,327 @@
+{# app/Resources/views/layout.html.twig #}
+
+{% extends "::superLayout.html.twig" %}
+
+{% block body %}
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+    {# {{ render(controller("NajdahUserBundle:User:lastUser")) }} #}
+
+    <!-- BEGIN HEADER -->   
+    <div class="header navbar navbar-inverse navbar-fixed-top">
+            <!-- BEGIN TOP NAVIGATION BAR -->
+            <div class="navbar-inner">
+                    <div class="container-fluid">
+                            <!-- BEGIN LOGO -->
+                            <a class="brand" href="{{ path('app_acceuil') }}">
+                            <img style="height:29px;" src="{{ asset('najdah/img/logo_header.png') }}" alt="logo" />
+                            </a>
+                            <!-- END LOGO -->
+                            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                            <img src="{{ asset('assets/img/menu-toggler.png') }}" alt="" />
+                            </a>          
+                            <!-- END RESPONSIVE MENU TOGGLER -->            
+                            <!-- BEGIN TOP NAVIGATION MENU -->              
+                            <ul class="nav pull-right">
+                                    <!-- BEGIN NOTIFICATION DROPDOWN -->   
+                                    <li class="dropdown" id="header_notification_bar">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            <i class="icon-warning-sign"></i>
+                                            <span class="badge">{{nbrNotices()}}</span>
+                                            </a>
+                                            <ul class="dropdown-menu extended notification">
+                                                    <li>
+                                                            <p>{{ 'You have'|trans }} {{nbrNotices()}} {{ 'new notifications'|trans }}</p>
+                                                    </li>
+                                                    {% block detailsNotice %}
+                                                            <li>
+                                                                 <ul class="dropdown-menu-list scroller" style="height:250px">
+                                                                {# 
+                                                                {% for lastNotice in lastNotices %}
+
+                                                                        <li>
+                                                                            <a href="{{ path('details_declaration', { 'id': lastNotice.id }) }}">
+                                                                            <span class="label label-success"><i class="icon-plus"></i></span>
+                                                                              {{lastNotice.adresse}}
+                                                                            <span class="time">{{lastNotice.date|date("Y/m/d")}}</span>
+                                                                            </a>
+                                                                        </li>
+                                                                       //
+                                                                         <li>
+                                                                                <a href="inbox.html?a=view">
+                                                                                <span class="photo"><img src="{{ asset('./assets/img/avatar3.jpg') }}" alt="" /></span>
+                                                                                <span class="subject">
+                                                                                <span class="from">Richard Doe</span>
+                                                                                <span class="time">46 mins</span>
+                                                                                </span>
+                                                                                <span class="message">
+                                                                                Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
+                                                                                auctor nibh...
+                                                                                </span>  
+                                                                                </a>
+                                                                        </li>
+                                                                        
+
+                                                                    {% endfor %}
+                                                                  #}
+                                                                </ul>
+                                                        </li>
+                                                    {% endblock %}
+                                                    <li class="external">
+                                                            <a href="#">{{ 'See all notifications'|trans }} <i class="m-icon-swapright"></i></a>
+                                                    </li>
+                                            </ul>
+                                    </li>
+                                    <!-- END NOTIFICATION DROPDOWN -->
+                                    
+                                    
+                                    <!-- BEGIN LANGUAGE DROPDOWN -->
+                                    <li class="dropdown language">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                        <span class="username">{{ 'Langue'|trans }}</span>
+                                        <i class="icon-angle-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('app_acceuil', {'_locale': 'ar'}) }}"> العربية</a></li>
+                                            <li><a href="{{ path('app_acceuil', {'_locale': 'fr'}) }}"> Francais</a></li>
+                                            <li><a href="{{ path('app_acceuil', {'_locale': 'en'}) }}"> English</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- END LANGUAGE DROPDOWN -->
+                                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                                    <li class="dropdown user">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+                                            <img alt="Avatar" style="height: 29px;" src="{% if app.user.image == '' %}{{ asset( 'assets/img/avatar.png' ) }}{% else %}{{ asset( app.user.webPath ) }}{% endif %}" />
+                                            <span class="username">{{ app.user.nom }}</span>
+                                            <i class="icon-angle-down"></i>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                    <li><a href="{{ path('fos_user_profile_show') }}"><i class="icon-user"></i> {{ 'My Profile'|trans }}</a></li>
+                                                    
+                                                    <li><a href="inbox.html"><i class="icon-envelope"></i> {{ 'My Inbox'|trans }} <span class="badge badge-important">3</span></a></li>
+                                                    
+                                                    <li class="divider"></li>
+                                                    <li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> {{ 'Full Screen'|trans }}</a></li>
+                                                    
+                                                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-key"></i> {{ 'Log Out'|trans }}</a></li>
+                                            </ul>
+                                    </li>
+                                    <!-- END USER LOGIN DROPDOWN -->
+                                    <!-- END USER LOGIN DROPDOWN -->
+                            </ul>
+                            <!-- END TOP NAVIGATION MENU --> 
+                    </div>
+            </div>
+            <!-- END TOP NAVIGATION BAR -->
+    </div>
+    <!-- END HEADER -->
+    
+    
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar nav-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->        
+                <ul class="page-sidebar-menu">
+                        <li>
+                                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                                <div class="sidebar-toggler hidden-phone"></div>
+                                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        </li>
+                        <li>
+                                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                                <form class="sidebar-search">
+                                        <div class="input-box">
+                                                <a href="javascript:;" class="remove"></a>
+                                                <input type="text" placeholder="Search..." />
+                                                <input type="button" class="submit" value=" " />
+                                        </div>
+                                </form>
+                                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                        </li>
+                        {% block menu %}
+                        <li class="start {% block menu_Acceuil_active %}{% endblock %}">
+                                <a href="{{ path('app_acceuil') }}">
+                                <i class="icon-home"></i> 
+                                <span class="title">{{ 'Acceuil'|trans }}</span>
+                                {% block menu_Acceuil %}{% endblock %}
+                                </a>
+                        </li>
+                        {#
+                        <li >
+                                <a href="javascript:;">
+                                <i class="icon-map-marker"></i> 
+                                <span class="title">Maps</span>
+                                <span class="arrow "></span>
+                                </a>
+                                <ul class="sub-menu">
+                                        <li >
+                                                <a href="maps_google.html">
+                                                Google Maps</a>
+                                        </li>
+                                        <li >
+                                                <a href="maps_vector.html">
+                                                Vector Maps</a>
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="last ">
+                                <a href="charts.html">
+                                <i class="icon-bar-chart"></i> 
+                                <span class="title">Visual Charts</span>
+                                </a>
+                        </li>
+                        #}
+                            
+                        <li class="{% block menu_Declarations_active %}{% endblock %}"><a href="{{ path('declaration_index') }}">
+                            <i class="icon-warning-sign"></i><span class="title">{{ 'Declarations'|trans }}</span>
+                            {% block menu_Declarations %}{% endblock %}
+                       </a></li>
+                        <li class="{% block menu_Etablissements_active %}{% endblock %}"><a href="{{ path('etab_index') }}">
+                            <i class="icon-hospital"></i><span class="title">{{ 'Etablissements'|trans }}</span>
+                            {% block menu_Etablissements %}{% endblock %}
+                       </a></li>
+                        <li class="{% block menu_Citoyens_active %}{% endblock %}"><a href="{{ path('citoyen_index') }}">
+                            <i class="icon-group"></i><span class="title">{{ 'Citoyens'|trans }}</span>
+                            {% block menu_Citoyens %}{% endblock %}
+                       </a></li>
+                       {% if is_granted('ROLE_ADMIN_POLICIER') %} 
+                       <li class="{% block menu_Policiers_active %}{% endblock %}"><a href="{{ path('user_index', {'type_user': 'Policier'}) }}">
+                            <i class="icon-truck"></i><span class="title">{{ 'Policiers'|trans }}</span>
+                            {% block menu_Policiers %}{% endblock %}
+                       </a></li>
+                       {% endif %}
+                       {% if is_granted('ROLE_ADMIN_POMPIER') %} 
+                       <li class="{% block menu_Pompiers_active %}{% endblock %}"><a href="{{ path('user_index', {'type_user': 'Pompier'}) }}">
+                            <i class="icon-user-md"></i><span class="title">{{ 'Pompiers'|trans }}</span>
+                            {% block menu_Pompiers %}{% endblock %}
+                        </a></li> </li>
+                       {% endif %}
+                       {#
+                       {% if is_granted('ROLE_ADMIN') %}
+                       <li>
+                            <a href="javascript:;">
+                            <i class="icon-cogs"></i> 
+                            <span class="title">Configuration</span>
+                            <span class="arrow "></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="#">Types Declaration</a>
+                                </li>
+                            </ul>
+                        </li>
+                       {% endif %}
+                       #}
+                       {% if is_granted('ROLE_ADMIN') %} 
+                       <li class="{% block menu_Statistiques_active %}{% endblock %}"><a href="{{ path('stat_index') }}">
+                            <i class="icon-bar-chart"></i><span class="title">{{ 'Statistiques'|trans }}</span>
+                            {% block menu_Statistiques %}{% endblock %}
+                       </a></li>
+                       {% endif %}
+                       
+                       {% block sub_menu %}
+                       {% endblock %}
+
+                        {% endblock %}
+                </ul>
+                <!-- END SIDEBAR MENU -->
+            </div>
+            <!-- END SIDEBAR -->
+            
+            <!-- BEGIN PAGE -->
+            <div class="page-content">
+                    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                    <div id="portlet-config" class="modal hide">
+                            <div class="modal-header">
+                                    <button data-dismiss="modal" class="close" type="button"></button>
+                                    <h3>Title</h3>
+                            </div>
+                            <div class="modal-body">
+                                    Description
+                            </div>
+                    </div>
+                    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                    <!-- BEGIN PAGE CONTAINER-->
+                    <div class="container-fluid">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="row-fluid">
+                                    <div class="span12">
+
+                                            <!-- BEGIN PAGE TITLE & BREADCRUMB
+                                            <h3 class="page-title">
+                                                    Dashboard <small>statistics and more</small>
+                                            </h3>
+                                            <ul class="breadcrumb">
+                                                    <li>
+                                                            <i class="icon-home"></i>
+                                                            <a href="{{ path('app_acceuil') }}">Acceuil</a> 
+                                                            <i class="icon-angle-right"></i>
+                                                    </li>
+                                                    <li><a href="#">Dashboard</a></li>
+                                                    <li class="pull-right no-text-shadow">
+                                                            <div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
+                                                                    <i class="icon-calendar"></i>
+                                                                    <span></span>
+                                                                    <i class="icon-angle-down"></i>
+                                                            </div>
+                                                    </li>
+                                            </ul>
+                                             END PAGE TITLE & BREADCRUMB-->
+                                    </div>
+                            </div>
+                            <!-- END PAGE HEADER-->
+                            <div id="dashboard">
+                                {% block body_app %}
+                                    
+                                {% endblock %}
+                            </div>
+                    <!-- END PAGE CONTAINER-->    
+            </div>
+            <!-- END PAGE -->
+    </div>
+<<<<<<< HEAD
+</footer>
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+{% block javascripts %}{% endblock %}
+=======
+    <!-- END CONTAINER -->
+    {% block footer %}
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+            <div class="footer-inner">
+                    2013 &copy; {{ app_name }} by IRISI TEAM.
+            </div>
+            <div class="footer-tools">
+                    <span class="go-top">
+                    <i class="icon-angle-up"></i>
+                    </span>
+            </div>
+    </div>
+    <!-- END FOOTER -->
+    {% endblock %}
+>>>>>>> origin/master
+</body>
+<!-- END BODY -->
+{% endblock %}
+
+{% block javascript_ready %}
+//alert('Cc2');
+App.init(); // initlayout and core plugins
+Index.init();
+/*
+Index.initJQVMAP(); // init index page's custom scripts
+Index.initCalendar(); // init index page's custom scripts
+Index.initCharts(); // init index page's custom scripts
+Index.initChat();
+Index.initMiniCharts();
+Index.initDashboardDaterange();
+Index.initIntro();
+Tasks.initDashboardWidget();
+*/
+//TableManaged.init();
+//TableAdvanced.init();
+{% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    esig.example.class: MIT\EsigBundle\Example
+
+services:
+#    esig.example:
+#        class: %esig.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

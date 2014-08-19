@@ -1,0 +1,6 @@
+## YAML Template.
+---
+parceles : 
+  type: rest
+  resource:     "EsigBundle:ParcelleRest"
+  name_prefix:  api_

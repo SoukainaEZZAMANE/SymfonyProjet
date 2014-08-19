@@ -1,0 +1,96 @@
+
+{% extends "::superLayout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+
+
+<!-- BEGIN BODY -->
+<body class="login">
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+            <img src="{{ asset('img/logo/logo.png') }}" alt="E-sig" /> 
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        {% block fos_user_content %}
+        <form class="form-vertical login-form" action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                
+                    
+            <h3 class="form-title">Connectez-vous :</h3>
+            <div class="alert alert-error hide">
+                <button class="close" data-dismiss="alert"></button>
+                {% if error %}
+                    <span>{{ error|trans }}</span>
+                {% endif %}
+            </div>
+            <div class="control-group">
+                
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label for="username" class="control-label visible-ie8 visible-ie9">{{ 'security.login.username'|trans }}</label>
+                <div class="controls">
+                    <div class="input-icon left">
+                            <i class="icon-user"></i>
+                            <input class="m-wrap placeholder-no-fix" type="text" autocomplete="off" placeholder="Nom d'utilisateur" id="username" name="_username"  required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                
+                <label for="password" class="control-label visible-ie8 visible-ie9">{{ 'security.login.password'|trans }}</label>
+                <div class="controls">
+                    <div class="input-icon left">
+                        <i class="icon-lock"></i>
+                        <input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" placeholder="Mot de passe" id="password" name="_password" required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                
+                
+                <label for="remember_me" class="checkbox">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="1"/> {{ 'security.login.remember_me'|trans }}
+                </label>
+                
+                <button type="submit" class="btn blue pull-right" id="_submit" name="_submit" >
+                    {{ 'security.login.submit'|trans }} <i class="m-icon-swapright m-icon-white"></i>
+                </button>            
+            </div>
+
+        </form>
+        <!-- END LOGIN FORM -->
+        {% endblock fos_user_content %}
+    </div>
+    <!-- END LOGIN -->
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright">
+            2014 &copy; E-sig
+    </div>
+    <!-- END COPYRIGHT -->
+
+</body>
+<!-- END BODY -->
+
+
+{% endblock %}
+
+{% block javascript_ready %}
+//alert('Cc');
+
+App.init();
+Login.init();
+$.backstretch([
+    "{{ asset('img/bg/mapp.jpg') }}",
+    "{{ asset('img/bg/lake.jpg') }}",
+    "{{ asset('img/bg/nature.jpg') }}"
+    
+    ], {
+      fade: 1000,
+      duration: 8000
+});
+{% endblock %}

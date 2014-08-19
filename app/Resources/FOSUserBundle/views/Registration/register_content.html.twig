@@ -1,0 +1,146 @@
+{% extends "::base.html.twig" %}
+{% block sidebar %}{% endblock %}
+
+{% block title %}Tableau de bord {% endblock %}
+
+{% block body %}
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box-large">
+                    <div class="panel-heading">
+                        <div class="panel-title"><h3>Connectez-vous </h3></div>                        
+                    </div>
+                    <div class="panel-body">
+                        <form   action="#">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <select class="form-control">
+                                        <option value="">Choisir</option>
+                                        <option>Ministère</option>
+                                        <option>Ministère</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Se souvenir de moi
+                                        </label>                                             
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-control">
+                                        <label>
+                                            Mot de passe oublié ? <a href="">Suivez ce lien</a>
+                                        </label>                                             
+                                    </div>
+                                </div>
+                                
+                            </fieldset>
+                            
+                            <div>
+                                <input type="submit" class="btn btn-primary" value="Se connecter">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+{% endblock %}
+
+{#
+{% trans_default_domain 'FOSUserBundle' %}
+    <div class="row">
+        <div class="span12">
+            <h2>Connexion</h2>
+            <div id="collapseOne" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                    <div class="span4">
+                        <h4>Pas encore inscrit ?</h4>
+                        <em>
+                            Donc nous vous invitons à vous inscrire<br />                                                     
+                        </em>
+                    </div>                   
+                    <div class="span4 offset2">
+                        <h4>Inscription</h4>
+                        <br/>                      
+     
+                        <br/>
+                        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                               <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                      Qui êtes vous?
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                      <li role="presentation"><a role="menuitem" tabindex="-1" onClick=change_technicien() href="#" >Technicien</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" onClick=change_entreprise() href="#">Entreprise</a></li>
+                     
+                      <li role="presentation" class="divider"></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ministère</a></li>
+                    </ul>
+          
+        </div>
+                            <div id="entr">
+                                <label>Raison sociale</label>
+                                <input id="RS" type="text"/>
+                                <label>Téléphone</label>
+                                <input id="tel" type="text"/>
+                                <label>Fax</label>
+                                <input id="fax" type="text"/>
+                            </div>
+                            <div id="tech">
+                                <label>Nom</label>
+                                <input  type="text"/>
+                                <label>Prénom</label>
+                                <input type="text"/>
+                                <label>Fonction</label>
+                                <input type="text"/>
+                            </div>
+                            {{ form_widget(form) }}
+ 
+    						  <br />
+                             <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+     <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+ $("#entr").hide();
+ $("#tech").hide();
+
+            });
+          
+          function change_entreprise() {
+               $("#entr").show(); 
+                $("#tech").hide();
+           }
+            function change_technicien() {
+                 $("#tech").show(); 
+               $("#entr").hide(); 
+               
+           }
+           
+            
+        </script>
+                             
+    </div>
+#}

@@ -1,0 +1,82 @@
+
+{% extends "EsigBundle::layout.html.twig" %}
+
+{% block title %}E-sig{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('assets/scripts/table_advanced_etab.js') }}"></script>
+{% endblock %}
+
+{% block body_app %}
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="portlet box green">
+        <div class="portlet-title">
+                <div class="caption"><i class="icon-globe"></i>Parcelles</div>
+                <div class="tools">
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                </div>
+        </div>
+        <div class="portlet-body">
+            <div class="table-toolbar">
+                <div class="btn-group">
+                    <button id="sample_editable_1_new" class="btn green"><a href="{{ path('parcelle_create') }}">
+                    Ajouter <i class="icon-plus"></i>
+                    </a></button>
+                </div>
+                <div class="btn-group pull-right">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">Outils <i class="icon-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#">Print</a></li>
+                        <li><a href="#">Save as PDF</a></li>
+                        <li><a href="#">Export to Excel</a></li>
+                    </ul>
+                </div>
+            </div>
+
+   <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+                <thead>
+                    <tr>
+                        <th class="hidden"></th>
+                        <th>Num Parcelle</th>
+                        <th>Num Marché</th>
+                        <th>Nom propriétaire</th>
+                        <th>Superficie</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for parcelle in parcelles%}
+                        <tr>
+                           <td>{{parcelle.numParcelle}}</td>
+                            <td >{{parcelle.numMarche}}</td>
+                            <td>{{parcelle.proprietaire}}</td>
+                            <td>{{parcelle.superficie}}</td>
+                           
+                            <td>
+                                <a class="widget-icon widget-icon-circle" href="#" ><span class="icon-edit" /></a>
+                                <a class="widget-icon widget-icon-circle" href="#" ><span class="icon-remove-sign" /></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <span>Pas (encore !) des etabs !!!</span>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+<!-- END EXAMPLE TABLE PORTLET-->
+               
+{% endblock %}
+					
+							
+	
+
+
+            
+{% block javascript_ready %}
+{{ parent() }}
+TableAdvanced.init();
+{% endblock %}
